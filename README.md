@@ -1,2 +1,2 @@
-# rsem
+# RSEM
 Dockerfile to use rsem
