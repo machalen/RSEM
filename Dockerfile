@@ -31,7 +31,7 @@ RUN rm -rf /var/lib/apt/lists/*
 WORKDIR /usr/local/
 RUN git clone https://github.com/alexdobin/STAR.git
 WORKDIR /usr/local/STAR/
-RUN git checkout 2.5.2b
+RUN git checkout 2.5.4b
 WORKDIR /usr/local/STAR/source
 RUN make STAR
 ENV PATH /usr/local/STAR/source:$PATH
@@ -43,3 +43,15 @@ RUN unzip bowtie2-2.3.4.1-linux-x86_64.zip
 RUN rm bowtie2-2.3.4.1-linux-x86_64.zip
 #Add bowtie2 to the path variable
 ENV PATH $PATH:/bin/bowtie2-2.3.4.1-linux-x86_64
+
+#Install RSEM
+WORKDIR /usr/local/
+RUN git clone https://github.com/deweylab/RSEM.git
+WORKDIR /usr/local/RSEM
+RUN git checkout v1.2.28
+RUN make
+RUN make ebseq
+ENV PATH /usr/local/RSEM:$PATH
+
+#Cleanup
+RUN apt-get clean
